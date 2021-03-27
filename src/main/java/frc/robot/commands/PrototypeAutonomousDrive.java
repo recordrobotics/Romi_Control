@@ -12,7 +12,7 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
   /**
    * Creates a new Autonomous Drive based on distance. This will drive out for a specified distance,
    * turn around and drive back.
-   *
+   * Our autonomous command.
    * @param drivetrain The drivetrain subsystem on which this command will run
    */
   private double sqr = 7.5;

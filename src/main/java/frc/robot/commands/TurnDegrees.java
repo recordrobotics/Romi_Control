@@ -21,7 +21,7 @@ public class TurnDegrees extends CommandBase {
    * @param drive The drive subsystem on which this command will run
    */
   public TurnDegrees(double speed, double degrees, Drivetrain drive) {
-    m_degrees = degrees*0.5; //The robot turns 80 degrees when degrees is 45
+    m_degrees = degrees; //The robot turns 60 degrees when degrees is 45
     m_speed = speed;
     m_drive = drive;
     addRequirements(drive);

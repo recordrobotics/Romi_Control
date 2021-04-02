@@ -15,7 +15,7 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
    * Our autonomous command.
    * @param drivetrain The drivetrain subsystem on which this command will run
    */
-  private double sqr = 7.5;
+  private double sqr = -7.5;
   public PrototypeAutonomousDrive(Drivetrain drivetrain) {
     addCommands(
         new DriveDistance(0.5, 1.5*sqr, drivetrain),

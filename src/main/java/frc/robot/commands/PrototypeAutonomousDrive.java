@@ -19,23 +19,23 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
   public PrototypeAutonomousDrive(Drivetrain drivetrain) {
     addCommands(
         new DriveDistance(0.5, 1.5*sqr, drivetrain),
-        new TurnDegrees(-0.5, 45, drivetrain),
-        new DriveDistance(0.5, 2.5*Math.sqrt(2)*sqr, drivetrain),
         new TurnDegrees(0.5, 45, drivetrain),
+        new DriveDistance(0.5, 2.5*Math.sqrt(2)*sqr, drivetrain),
+        new TurnDegrees(-0.5, 45, drivetrain),
         new DriveDistance(0.5, 3*sqr, drivetrain),
-        new TurnDegrees(0.5, 45, drivetrain),
+        new TurnDegrees(-0.5, 45, drivetrain),
         new DriveDistance(0.5, 2.5*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 90, drivetrain),
+        new TurnDegrees(0.5, 90, drivetrain),
         new DriveDistance(0.5, Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 45, drivetrain),
-        new DriveDistance(0.5, Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 45, drivetrain),
-        new DriveDistance(0.5, 2*Math.sqrt(2)*sqr, drivetrain),
         new TurnDegrees(0.5, 45, drivetrain),
+        new DriveDistance(0.5, Math.sqrt(2)*sqr, drivetrain),
+        new TurnDegrees(0.5, 45, drivetrain),
+        new DriveDistance(0.5, 2*Math.sqrt(2)*sqr, drivetrain),
+        new TurnDegrees(-0.5, 45, drivetrain),
         new DriveDistance(0.5, 5*sqr, drivetrain),
-        new TurnDegrees(0.5, 45, drivetrain),
-        new DriveDistance(0.5, 2*Math.sqrt(2)*sqr, drivetrain),
         new TurnDegrees(-0.5, 45, drivetrain),
+        new DriveDistance(0.5, 2*Math.sqrt(2)*sqr, drivetrain),
+        new TurnDegrees(0.5, 45, drivetrain),
         new DriveDistance(0.5, 1.5*sqr, drivetrain));
   }
 }

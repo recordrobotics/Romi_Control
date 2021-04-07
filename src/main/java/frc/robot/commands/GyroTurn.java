@@ -7,11 +7,17 @@ package frc.robot.commands;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import java.lang.Math;
+import java.util.ArrayList;
+
 
 public class GyroTurn extends CommandBase {
   private final Drivetrain m_drive;
   private final double m_degrees;
   private double m_speed;
+  private double integral = 0, error = 0, deriv = 0;
+  private double kp = 0.2, ki = 0, kd = 0;
+  private final double time = 0.02;
+  private ArrayList<Double> errorlist = new ArrayList<Double>();
 
   /**
    * Creates a new GyroTurn. This command will turn your robot for a desired rotation (in
@@ -27,6 +33,44 @@ public class GyroTurn extends CommandBase {
     addRequirements(drive);
   }
   
+  public double control(double value) {
+
+    double output = 0;
+
+    error = m_degrees - value;
+    errorlist.add(error);
+
+    //factor in the p-term
+    output += kp * error;
+    //factor in the i-term
+    integral += error*time;
+    output += ki * integral;
+
+    if (errorlist.size() >= 10){
+        updateDeriv();
+    }
+
+    //factor in the d-term
+    output += kd * deriv;
+
+    return output;
+}
+private void updateDeriv(){
+  double sumx = 0, sumy = 0, sumxy = 0, sumxsq = 0;
+
+  for (int i = 0; i < errorlist.size(); i++){
+      sumx += errorlist.get(i);
+      sumy += 0.2 * i;
+      sumxy += (errorlist.get(i) * 0.2 * i);
+      sumxsq += errorlist.get(i) * errorlist.get(i);
+  }
+
+  double m = (sumxy - sumx * sumy)/(sumxsq - sumx * sumx);
+  deriv = m;
+
+  errorlist.clear();
+}
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {

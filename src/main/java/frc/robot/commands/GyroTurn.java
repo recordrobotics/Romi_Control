@@ -15,7 +15,7 @@ public class GyroTurn extends CommandBase {
   private final double m_degrees;
   private double m_speed;
   private double integral = 0, error = 0, deriv = 0;
-  private double kp = 0.2, ki = 0, kd = 0;
+  private double kp = 0.005, ki = 0, kd = 0;
   private final double time = 0.02;
   private ArrayList<Double> errorlist = new ArrayList<Double>();
 
@@ -47,7 +47,7 @@ public class GyroTurn extends CommandBase {
     output += ki * integral;
 
     if (errorlist.size() >= 10){
-        updateDeriv();
+      updateDeriv();
     }
 
     //factor in the d-term
@@ -59,10 +59,10 @@ private void updateDeriv(){
   double sumx = 0, sumy = 0, sumxy = 0, sumxsq = 0;
 
   for (int i = 0; i < errorlist.size(); i++){
-      sumx += errorlist.get(i);
-      sumy += 0.2 * i;
-      sumxy += (errorlist.get(i) * 0.2 * i);
-      sumxsq += errorlist.get(i) * errorlist.get(i);
+    sumx += errorlist.get(i);
+    sumy += 0.2 * i;
+    sumxy += (errorlist.get(i) * 0.2 * i);
+    sumxsq += errorlist.get(i) * errorlist.get(i);
   }
 
   double m = (sumxy - sumx * sumy)/(sumxsq - sumx * sumx);
@@ -83,7 +83,7 @@ private void updateDeriv(){
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_speed = 1;
+    m_speed = control(getTurningDistance());
     m_drive.arcadeDrive(0,m_speed);
   }
 
@@ -96,15 +96,15 @@ private void updateDeriv(){
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(getTurningDistance()-m_degrees) <= 0.5){
-    return  true;
-  }
+    if(Math.abs(getTurningDistance()-m_degrees) <= 2){
+      return  true;
+    }
     else{
       return false;
     }
   }
 
   private double getTurningDistance() {
-    return m_drive.getGyroAngleX();
+    return m_drive.getGyroAngleZ();
   }
 }

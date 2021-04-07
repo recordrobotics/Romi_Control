@@ -18,7 +18,8 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
   private double sqr = 7.5;
   public PrototypeAutonomousDrive(Drivetrain drivetrain) {
     addCommands(
-        new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(90, drivetrain)
+        /*new DriveDistance(-0.5, 1.5*sqr, drivetrain),
         new TurnDegrees(-0.5, 45, drivetrain),
         new DriveDistance(-0.5, 2*Math.sqrt(2)*sqr, drivetrain),
         new TurnDegrees(0.5, 65, drivetrain),
@@ -36,6 +37,6 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
         new TurnDegrees(0.5, 45, drivetrain),
         new DriveDistance(-0.5, 2*Math.sqrt(2)*sqr, drivetrain),
         new TurnDegrees(-0.5, 45, drivetrain),
-        new DriveDistance(-0.5, 1.5*sqr, drivetrain));
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain)*/);
   }
 }

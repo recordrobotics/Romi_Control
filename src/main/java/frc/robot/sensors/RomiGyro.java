@@ -6,9 +6,11 @@ package frc.robot.sensors;
 
 import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDevice.Direction;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RomiGyro {
+public class RomiGyro extends SubsystemBase{
   private SimDouble m_simRateX;
   private SimDouble m_simRateY;
   private SimDouble m_simRateZ;
@@ -19,6 +21,7 @@ public class RomiGyro {
   private double m_angleXOffset;
   private double m_angleYOffset;
   private double m_angleZOffset;
+  private double offset = (90.0/175 + 2.48/90)*0.01;
 
   /** Create a new RomiGyro. */
   public RomiGyro() {
@@ -112,6 +115,14 @@ public class RomiGyro {
 
     return 0.0;
   }
+
+  @Override
+  public void periodic() {
+    // TODO Auto-generated method stub
+    m_angleZOffset += offset;
+    SmartDashboard.putNumber("angle_z", this.getAngleZ());
+  }
+  
 
   /** Reset the gyro angles to 0. */
   public void reset() {

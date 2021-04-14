@@ -8,6 +8,7 @@ import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDevice.Direction;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RomiGyro extends SubsystemBase{
@@ -131,5 +132,16 @@ public class RomiGyro extends SubsystemBase{
       m_angleYOffset = m_simAngleY.get();
       m_angleZOffset = m_simAngleZ.get();
     }
+  }
+
+  public void calibrate(){
+    System.out.println("Initiating calibration: DO NOT MOVE ROBOT!");
+    
+    double initAngle = getAngleZ();
+    Timer.delay(5);
+    offset = (getAngleZ() - initAngle)/(5.0 * 50.0);
+
+    System.out.println("Done Calibrating!!!");
+    reset();
   }
 }

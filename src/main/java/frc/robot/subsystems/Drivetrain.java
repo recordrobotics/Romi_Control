@@ -31,6 +31,8 @@ public class Drivetrain extends SubsystemBase {
   // Set up the RomiGyro
   private final RomiGyro m_gyro = new RomiGyro();
 
+  private final boolean do_calibration = true; //if this is TRUE, do not move for 5 seconds until it is done!
+
   // Set up the BuiltInAccelerometer
   private final BuiltInAccelerometer m_accelerometer = new BuiltInAccelerometer();
 
@@ -40,6 +42,10 @@ public class Drivetrain extends SubsystemBase {
     m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     resetEncoders();
+
+    if (do_calibration){
+      m_gyro.calibrate();
+    }
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {

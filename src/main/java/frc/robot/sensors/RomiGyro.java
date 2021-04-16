@@ -8,6 +8,7 @@ import edu.wpi.first.hal.SimDevice;
 import edu.wpi.first.hal.SimDevice.Direction;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.wpilibj.LinearFilter;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,6 +24,9 @@ public class RomiGyro extends SubsystemBase{
   private double m_angleYOffset;
   private double m_angleZOffset;
   private double offset = (90.0/175 + 2.48/90)*0.01;
+  private double angle_z;
+
+  LinearFilter smoothing_filter = LinearFilter.singlePoleIIR(0.1, 0.02);
 
   /** Create a new RomiGyro. */
   public RomiGyro() {
@@ -111,7 +115,7 @@ public class RomiGyro extends SubsystemBase{
    */
   public double getAngleZ() {
     if (m_simAngleZ != null) {
-      return m_simAngleZ.get() - m_angleZOffset;
+      return angle_z - m_angleZOffset;
     }
 
     return 0.0;
@@ -119,7 +123,8 @@ public class RomiGyro extends SubsystemBase{
 
   @Override
   public void periodic() {
-    // TODO Auto-generated method stub
+    angle_z = smoothing_filter.calculate(m_simAngleZ.get());
+
     m_angleZOffset += offset;
     SmartDashboard.putNumber("angle_z", this.getAngleZ());
   }

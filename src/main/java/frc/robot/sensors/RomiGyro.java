@@ -135,12 +135,13 @@ public class RomiGyro extends SubsystemBase{
   }
 
   public void calibrate(){
+    offset = 0;
     System.out.println("Initiating calibration: DO NOT MOVE ROBOT!");
     
     double initAngle = getAngleZ();
     Timer.delay(5);
     offset = (getAngleZ() - initAngle)/(5.0 * 50.0);
-
+    System.out.println("initAngle: " + initAngle + ". getAngleZ(): " + getAngleZ() + ". offset: " + offset);
     System.out.println("Done Calibrating!!!");
     reset();
   }

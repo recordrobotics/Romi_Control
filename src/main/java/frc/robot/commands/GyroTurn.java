@@ -29,10 +29,10 @@ public class GyroTurn extends CommandBase {
   public GyroTurn(double degrees, Drivetrain drive) {
     m_degrees = degrees; //The robot turns 60 degrees when degrees is 45
     m_drive = drive;
-    
+
     addRequirements(drive);
   }
-  
+
   public double control(double value) {
 
     double output = 0;

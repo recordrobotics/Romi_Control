@@ -100,14 +100,14 @@ public class RomiGyro extends SubsystemBase{
    *
    * @return current angle around Y-axis in degrees
    */
-  public double getAngleY() {
+  public double getAngleY() { 
     if (m_simAngleY != null) {
       return m_simAngleY.get() - m_angleYOffset;
     }
-
+    
     return 0.0;
   }
-
+  
   /**
    * Get the currently reported angle around the Z-axis.
    *
@@ -115,7 +115,7 @@ public class RomiGyro extends SubsystemBase{
    */
   public double getAngleZ() {
     if (m_simAngleZ != null) {
-      return angle_z - m_angleZOffset;
+      return smoothing_filter.calculate(m_simAngleZ.get()) - m_angleZOffset;
     }
 
     return 0.0;
@@ -123,7 +123,6 @@ public class RomiGyro extends SubsystemBase{
 
   @Override
   public void periodic() {
-    angle_z = smoothing_filter.calculate(m_simAngleZ.get());
 
     m_angleZOffset += offset;
     SmartDashboard.putNumber("angle_z", this.getAngleZ());
@@ -140,13 +139,14 @@ public class RomiGyro extends SubsystemBase{
   }
 
   public void calibrate(){
-    offset = 0;
+    this.offset = 0;
     System.out.println("Initiating calibration: DO NOT MOVE ROBOT!");
     
     double initAngle = getAngleZ();
-    Timer.delay(5);
-    offset = (getAngleZ() - initAngle)/(5.0 * 50.0);
-    System.out.println("initAngle: " + initAngle + ". getAngleZ(): " + getAngleZ() + ". offset: " + offset);
+    Timer.delay(10);
+    double finalAngle = getAngleZ();
+    this.offset = (finalAngle - initAngle)/(10.0 * 50.0);
+    System.out.println("initAngle: " + initAngle + ". finalAngle: " + finalAngle + ". offset: " + this.offset);
     System.out.println("Done Calibrating!!!");
     reset();
   }

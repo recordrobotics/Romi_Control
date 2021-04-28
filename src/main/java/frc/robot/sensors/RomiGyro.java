@@ -104,10 +104,10 @@ public class RomiGyro extends SubsystemBase{
     if (m_simAngleY != null) {
       return m_simAngleY.get() - m_angleYOffset;
     }
-    
+
     return 0.0;
   }
-  
+
   /**
    * Get the currently reported angle around the Z-axis.
    *
@@ -127,7 +127,6 @@ public class RomiGyro extends SubsystemBase{
     m_angleZOffset += offset;
     SmartDashboard.putNumber("angle_z", this.getAngleZ());
   }
-  
 
   /** Reset the gyro angles to 0. */
   public void reset() {
@@ -141,7 +140,7 @@ public class RomiGyro extends SubsystemBase{
   public void calibrate(){
     this.offset = 0;
     System.out.println("Initiating calibration: DO NOT MOVE ROBOT!");
-    
+
     double initAngle = getAngleZ();
     Timer.delay(10);
     double finalAngle = getAngleZ();

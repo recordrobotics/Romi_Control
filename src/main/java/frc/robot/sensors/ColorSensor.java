@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSensor extends SubsystemBase {
     
-    private final AnalogInput m_colorSensorColor = new AnalogInput(6);
-    private final AnalogInput m_colorSensorBrightness = new AnalogInput(2);  
+    private AnalogInput m_colorSensorColor = new AnalogInput(6);
+    private AnalogInput m_colorSensorBrightness = new AnalogInput(2);  
 
     public int getColorSensorColor() {
         if (m_colorSensorColor != null) {
-            return m_colorSensorColor.getChannel();
+            return m_colorSensorColor.getValue();
           }
       
           return 0;
@@ -19,7 +19,7 @@ public class ColorSensor extends SubsystemBase {
 
     public int getColorSensorBrightness() {
         if (m_colorSensorBrightness != null) {
-            return m_colorSensorBrightness.getChannel();
+            return m_colorSensorBrightness.getValue();
           }
       
           return 0;

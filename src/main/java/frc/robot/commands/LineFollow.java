@@ -13,18 +13,16 @@ public class LineFollow extends CommandBase {
 
 private int color;
 
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-
+  
   }
 
   // Called once the command ends or is interrupted.
@@ -36,5 +34,4 @@ private int color;
   public boolean isFinished() {
     return false;
   }
-
-} 
+}

@@ -18,25 +18,24 @@ public class PrototypeAutonomousDrive extends SequentialCommandGroup {
   private double sqr = 7.5;
   public PrototypeAutonomousDrive(Drivetrain drivetrain) {
     addCommands(
-        new GyroTurn(90, drivetrain)
-        /*new DriveDistance(-0.5, 1.5*sqr, drivetrain),
-        new TurnDegrees(-0.5, 45, drivetrain),
-        new DriveDistance(-0.5, 2*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(0.5, 65, drivetrain),
-        new DriveDistance(-0.5, 4.5*sqr, drivetrain),
-        new TurnDegrees(0.5, 45, drivetrain),
-        new DriveDistance(-0.5, 2.25*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 90, drivetrain),
+        //new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(90, drivetrain)/*,
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(90, drivetrain),
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(-60, drivetrain),
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(-60, drivetrain),
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain),
+        new GyroTurn(-60, drivetrain),
+        new DriveDistance(-0.5, 1.5*sqr, drivetrain)/*,
+        new GyroTurn(60, drivetrain),
         new DriveDistance(-0.5, 1.5*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 90, drivetrain),
-        new DriveDistance(-0.5, Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 60, drivetrain),
-        new DriveDistance(-0.5, 1.5*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(0.5, 65, drivetrain),
+        new GyroTurn(65, drivetrain),
         new DriveDistance(-0.5, 5*sqr, drivetrain),
-        new TurnDegrees(0.5, 45, drivetrain),
+        new GyroTurn(45, drivetrain),
         new DriveDistance(-0.5, 2*Math.sqrt(2)*sqr, drivetrain),
-        new TurnDegrees(-0.5, 45, drivetrain),
+        new GyroTurn(45, drivetrain),
         new DriveDistance(-0.5, 1.5*sqr, drivetrain)*/);
   }
 }

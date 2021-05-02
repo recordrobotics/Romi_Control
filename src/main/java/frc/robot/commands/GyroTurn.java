@@ -15,7 +15,7 @@ public class GyroTurn extends CommandBase {
   private final double m_degrees;
   private double m_speed;
   private double integral = 0, error = 0, deriv = 0;
-  private double kp = 0.004, ki = 0.005, kd = 0;
+  private double kp = 0.0008, ki = 0.0009, kd = 0;
   private final double time = 0.02;
   private ArrayList<Double> errorlist = new ArrayList<Double>();
 

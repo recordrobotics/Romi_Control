@@ -15,7 +15,7 @@ public class GyroTurn extends CommandBase {
   private final double m_degrees;
   private double m_speed;
   private double integral = 0, error = 0, deriv = 0;
-  private double kp = 0.0008, ki = 0.0009, kd = 0;
+  private double kp = 0.0012, ki = 0.001, kd = 0;
   private final double time = 0.02;
   private ArrayList<Double> errorlist = new ArrayList<Double>();
 
@@ -97,7 +97,7 @@ private void updateDeriv(){
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(Math.abs(getTurningDistance())-m_degrees) <= 2);
+    return (Math.abs(getTurningDistance()+m_degrees) <= 2);
   }
 
   private double getTurningDistance() {
